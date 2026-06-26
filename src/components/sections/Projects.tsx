@@ -5,9 +5,14 @@ import { Github } from "../ui/Icons";
 import { SectionHeading } from "../ui/SectionHeading";
 import { PORTFOLIO_DATA } from "../../data/data";
 
-function ProjectVisual({ type }: { type: string }) {
+function ProjectVisual({ project }: { project: any }) {
+  const useStyleforgeImage = project.title?.includes("Neural Style Transfer");
+  const backgroundUrl = useStyleforgeImage
+    ? "/styleforge-ai-showcase.png"
+    : "https://upload.wikimedia.org/wikipedia/commons/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg";
+
   // Render a placeholder mockup based on the project type
-  if (type.includes("Computer Vision")) {
+  if (project.type.includes("Computer Vision")) {
     return (
       <div className="w-full h-full bg-slate-900 rounded-lg overflow-hidden relative border border-slate-700">
         <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjJEM0VFIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1vcGFjaXR5PSIwLjMiLz4KPC9zdmc+')] bg-repeat" />
@@ -24,15 +29,18 @@ function ProjectVisual({ type }: { type: string }) {
         </div>
       </div>
     );
-  } else if (type.includes("Deep Learning")) {
+  } else if (project.type.includes("Deep Learning")) {
     return (
-      <div className="w-full h-full bg-slate-900 rounded-lg overflow-hidden relative border border-slate-700 flex divide-x divide-slate-700">
-        <div className="flex-1 bg-slate-800 flex items-center justify-center relative">
-          <span className="font-mono text-slate-500 text-xs">Content</span>
-        </div>
-        <div className="flex-1 bg-gradient-to-br from-violet-900/40 to-cyan-900/40 flex items-center justify-center relative">
-          <span className="font-mono text-cyan-400 text-xs">Styled Output</span>
-          <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg')] opacity-20 bg-cover bg-center" />
+      <div className="w-full h-full bg-slate-900 rounded-lg overflow-hidden relative border border-slate-700">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${backgroundUrl})` }}
+        />
+        <div className="absolute inset-0 bg-slate-950/20" />
+        <div className="relative w-full h-full flex items-center justify-center">
+          <span className="font-mono text-cyan-100 text-xs uppercase tracking-[0.3em] z-10">
+            Neural Style Transfer
+          </span>
         </div>
       </div>
     );
@@ -106,7 +114,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
           style={{ rotateX: x, rotateY: y }}
           className="relative w-full aspect-[4/3] rounded-xl overflow-hidden glass-card p-2 shadow-xl border-white/5 bg-white/5 transition-colors duration-300 hover:border-cyan-500/30"
         >
-          <ProjectVisual type={project.type} />
+          <ProjectVisual project={project} />
         </motion.div>
       </div>
 
