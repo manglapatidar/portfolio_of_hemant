@@ -7,12 +7,33 @@ import { PORTFOLIO_DATA } from "../../data/data";
 
 function ProjectVisual({ project }: { project: any }) {
   const useStyleforgeImage = project.title?.includes("Neural Style Transfer");
+  const useSnapClassImage = project.title?.includes("AI Attendance System");
   const backgroundUrl = useStyleforgeImage
-    ? "/styleforge-ai-showcase.png"
+    ? "/StyleForgeAI_Portfolio_Showcase.png"
+    : useSnapClassImage
+    ? "/SnapClass_Portfolio_Showcase.png"
     : "https://upload.wikimedia.org/wikipedia/commons/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg";
 
   // Render a placeholder mockup based on the project type
   if (project.type.includes("Computer Vision")) {
+    if (useSnapClassImage) {
+      return (
+        <div className="w-full h-full bg-slate-900 rounded-lg overflow-hidden relative border border-slate-700">
+          <img
+            src={backgroundUrl}
+            alt="SnapClass preview"
+            className="absolute inset-0 w-full h-full object-contain"
+          />
+          <div className="absolute inset-0 bg-slate-950/20" />
+          <div className="relative w-full h-full flex items-center justify-center z-10">
+            <span className="font-mono text-cyan-100 text-xs uppercase tracking-[0.3em]">
+              AI Attendance System
+            </span>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="w-full h-full bg-slate-900 rounded-lg overflow-hidden relative border border-slate-700">
         <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjJEM0VFIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1vcGFjaXR5PSIwLjMiLz4KPC9zdmc+')] bg-repeat" />
