@@ -32,9 +32,10 @@ function ProjectVisual({ project }: { project: any }) {
   } else if (project.type.includes("Deep Learning")) {
     return (
       <div className="w-full h-full bg-slate-900 rounded-lg overflow-hidden relative border border-slate-700">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundUrl})` }}
+        <img
+          src={backgroundUrl}
+          alt="StyleForge preview"
+          className="absolute inset-0 w-full h-full object-contain"
         />
         <div className="absolute inset-0 bg-slate-950/20" />
         <div className="relative w-full h-full flex items-center justify-center">
