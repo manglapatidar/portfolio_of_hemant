@@ -1,3 +1,4 @@
+import { VoiceProvider } from "./context/VoiceContext";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { Hero } from "./components/sections/Hero";
@@ -9,18 +10,20 @@ import { Contact } from "./components/sections/Contact";
 
 function App() {
   return (
-    <div className="min-h-screen bg-navy text-slate-300 font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Journey />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <VoiceProvider>
+      <div className="min-h-screen bg-navy text-slate-300 font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Journey />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </VoiceProvider>
   );
 }
 

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, Volume2, VolumeX } from "lucide-react";
 import { cn } from "../../utils/cn";
 import { Button } from "../ui/Button";
+import { useVoiceGreeting } from "../../context/VoiceContext";
 
 const NAV_LINKS = [
   { id: "about", label: "01. About" },
@@ -15,6 +16,8 @@ const NAV_LINKS = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const { isPlaying, isMuted, toggleMute, playGreeting } = useVoiceGreeting();
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -83,16 +86,39 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <Button 
-              variant="outline" 
-              className="py-2 px-4 text-sm"
-              href="/Resume.pdf"
-              target="_blank"
-              magnetic={false}
-              download="Hemant_Patidar_Resume.pdf"
-            >
-              Resume <Download className="w-4 h-4 ml-1" />
-            </Button>
+            <div className="flex items-center gap-3">
+              {/* Voice Mute/Unmute Toggle Button */}
+              <button
+                onClick={isMuted ? toggleMute : isPlaying ? toggleMute : playGreeting}
+                className={cn(
+                  "p-2 rounded-lg border transition-all flex items-center gap-2 font-mono text-xs focus:outline-none",
+                  isPlaying
+                    ? "bg-cyan-500/20 border-cyan-400 text-cyan-300 animate-pulse shadow-[0_0_12px_rgba(34,211,238,0.3)]"
+                    : isMuted
+                    ? "bg-navy/80 border-slate-700 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50"
+                    : "bg-navy/80 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
+                )}
+                title={isMuted ? "Unmute Voice Greeting" : isPlaying ? "Mute Voice Greeting" : "Play Male Welcome Greeting"}
+              >
+                {isMuted ? (
+                  <VolumeX className="w-4 h-4 text-red-400" />
+                ) : (
+                  <Volume2 className="w-4 h-4 text-cyan-400" />
+                )}
+                <span className="hidden lg:inline">{isPlaying ? "Speaking..." : isMuted ? "Muted" : "Voice Greeting"}</span>
+              </button>
+
+              <Button 
+                variant="outline" 
+                className="py-2 px-4 text-sm"
+                href="/Resume.pdf"
+                target="_blank"
+                magnetic={false}
+                download="Hemant_Patidar_Resume.pdf"
+              >
+                Resume <Download className="w-4 h-4 ml-1" />
+              </Button>
+            </div>
           </nav>
 
           {/* Mobile Toggle */}
