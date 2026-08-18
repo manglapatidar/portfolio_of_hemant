@@ -5,7 +5,7 @@ export const PORTFOLIO_DATA = {
       degree: "B.Tech — Computer Science Engineering (AI)",
       institution: "Mandsaur University, Mandsaur (M.P.)",
       duration: "2023 – Present",
-      cgpa: "6.38/10"
+      cgpa: "6.55/10"
     },
     stats: [
       { id: 1, label: "Projects Built", value: 3, suffix: "+" },
@@ -90,7 +90,7 @@ export const PORTFOLIO_DATA = {
       degree: "B.Tech – Computer Science Engineering (AI)",
       institution: "Mandsaur University",
       duration: "2023–2027",
-      cgpa: "6.38/10"
+      cgpa: "6.55/10"
     },
     {
       id: 2,
