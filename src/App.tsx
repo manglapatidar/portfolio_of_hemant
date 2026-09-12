@@ -25,7 +25,7 @@ function App() {
 
       {/* Main Portfolio Sections */}
       <main className="relative z-10">
-        <HeroHemantflix selectedProfile="explorer" />
+        <HeroHemantflix />
         <CinematicSubjectReveal />
         <NetflixRows onOpenProjectModal={(project) => setSelectedProject(project)} />
       </main>
