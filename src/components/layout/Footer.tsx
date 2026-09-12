@@ -1,35 +1,45 @@
-import { Mail } from "lucide-react";
-import { Github, Linkedin } from "../ui/Icons";
+import React from "react";
 import { PORTFOLIO_DATA } from "../../data/data";
 
-export function Footer() {
-  const { contact } = PORTFOLIO_DATA;
-  const currentYear = new Date().getFullYear();
+export const Footer: React.FC = () => {
+  const { engineer } = PORTFOLIO_DATA;
 
   return (
-    <footer className="border-t border-white/5 py-8 mt-12">
-      <div className="container mx-auto px-6 md:px-12 max-w-6xl flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-6">
-          <a href={contact.github} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors">
-            <Github className="w-5 h-5" />
-          </a>
-          <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-cyan-400 transition-colors">
-            <Linkedin className="w-5 h-5" />
-          </a>
-          <a href={`mailto:${contact.email}`} className="text-slate-500 hover:text-cyan-400 transition-colors">
-            <Mail className="w-5 h-5" />
-          </a>
+    <footer className="py-12 border-t border-white/10 bg-[#030408] text-slate-400 font-mono text-xs relative z-10">
+      <div className="container mx-auto px-6 max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span className="text-[#e50914] font-bold">HEMANTFLIX</span> — {engineer.name} ({engineer.role})
         </div>
-        
-        <div className="text-slate-500 text-sm">
-          © {currentYear} Hemant Patidar. All rights reserved.
+        <div className="text-slate-500 text-[11px]">
+          © {new Date().getFullYear()} ALL RIGHTS RESERVED • BUILT WITH REACT, TYPESCRIPT, TAILWIND & GSAP/FRAMER MOTION
         </div>
-        
-        <div className="font-mono text-xs text-slate-600 flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          SYS.STATUS: ONLINE
+        <div className="flex items-center gap-4">
+          <a
+            href={engineer.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[#e50914] transition-colors"
+          >
+            GITHUB
+          </a>
+          <a
+            href={engineer.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-cyan-400 transition-colors"
+          >
+            LINKEDIN
+          </a>
+          <a
+            href="/Resume 3.pdf"
+            target="_blank"
+            download="Hemant_Patidar_Resume.pdf"
+            className="hover:text-violet-400 transition-colors"
+          >
+            RESUME
+          </a>
         </div>
       </div>
     </footer>
   );
-}
+};

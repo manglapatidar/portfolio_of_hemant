@@ -1,173 +1,118 @@
-import { useState, useEffect } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { Menu, X, Download, Volume2, VolumeX } from "lucide-react";
-import { cn } from "../../utils/cn";
-import { Button } from "../ui/Button";
-import { useVoiceGreeting } from "../../context/VoiceContext";
+import React, { useState, useEffect } from "react";
+import { Menu, X, FileText, UserCheck } from "lucide-react";
 
-const NAV_LINKS = [
-  { id: "about", label: "01. About" },
-  { id: "skills", label: "02. Skills" },
-  { id: "projects", label: "03. Projects" },
-  { id: "journey", label: "04. Experience" },
-  { id: "contact", label: "05. Contact" },
-];
+interface NavbarProps {
+  selectedProfile: string;
+  onChangeProfile: () => void;
+}
 
-export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
-  const { isPlaying, isMuted, toggleMute, playGreeting } = useVoiceGreeting();
-
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+export const Navbar: React.FC<NavbarProps> = ({ selectedProfile, onChangeProfile }) => {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = NAV_LINKS.map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(NAV_LINKS[i].id);
-          break;
-        }
-      }
+      setScrolled(window.scrollY > 40);
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const navLinks = [
+    { label: "WORK", href: "#projects" },
+    { label: "ENGINEER", href: "#engineer" },
+    { label: "STACK", href: "#stack" },
+    { label: "CERTIFIED", href: "#certifications" },
+    { label: "EDUCATION", href: "#education" },
+  ];
 
   return (
-    <>
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-violet-500 origin-left z-50"
-        style={{ scaleX }}
-      />
-      <header className="fixed top-1 left-0 right-0 z-40 glass-panel py-4 transition-all duration-300">
-        <div className="container mx-auto px-6 md:px-12 flex items-center justify-between max-w-6xl">
-          <a 
-            href="#" 
-            onClick={(e) => { e.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}); }}
-            className="font-mono text-xl font-bold tracking-tighter group flex items-center gap-1 focus:outline-none"
+    <header
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-6xl transition-all duration-500 rounded-2xl ${
+        scrolled
+          ? "bg-[#060814]/90 backdrop-blur-xl border border-red-500/40 shadow-[0_0_30px_rgba(0,0,0,0.8)] py-3 px-6"
+          : "bg-black/50 backdrop-blur-md border border-white/10 py-4 px-6"
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        
+        {/* Brand Logo */}
+        <a href="#hero" className="flex items-center gap-2.5 group">
+          <div className="font-mono font-black text-xl text-[#e50914] tracking-wider drop-shadow-[0_0_15px_rgba(229,9,20,0.6)]">
+            HEMANTFLIX
+          </div>
+        </a>
+
+        {/* Desktop Links */}
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="font-mono text-xs font-semibold text-slate-300 hover:text-[#e50914] transition-colors tracking-wider"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Action Controls */}
+        <div className="flex items-center gap-3">
+          {/* Profile Badge Button */}
+          <button
+            onClick={onChangeProfile}
+            title="Switch Profile Mode"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl font-mono text-[11px] font-bold bg-[#e50914]/20 border border-red-500/50 text-red-400 hover:bg-red-600 hover:text-white transition-all shadow-[0_0_15px_rgba(229,9,20,0.3)]"
           >
-            <span className="text-cyan-400 group-hover:text-cyan-300 transition-colors">[</span>
-            <span className="text-white">hp</span>
-            <span className="text-cyan-400 group-hover:text-cyan-300 transition-colors">]</span>
+            <UserCheck className="w-3.5 h-3.5" />
+            <span className="uppercase">{selectedProfile}</span>
+          </button>
+
+          {/* Resume CTA */}
+          <a
+            href="/Resume 3.pdf"
+            target="_blank"
+            download="Hemant_Patidar_Resume.pdf"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-600/20 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-600/30 font-mono text-[11px] font-bold transition-all"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>RESUME</span>
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            <ul className="flex items-center gap-6">
-              {NAV_LINKS.map((link) => (
-                <li key={link.id}>
-                  <button
-                    onClick={() => scrollTo(link.id)}
-                    className={cn(
-                      "font-mono text-sm transition-colors hover:text-cyan-400 focus:outline-none focus:text-cyan-400",
-                      activeSection === link.id ? "text-cyan-400" : "text-slate-400"
-                    )}
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <div className="flex items-center gap-3">
-              {/* Voice Mute/Unmute Toggle Button */}
-              <button
-                onClick={isMuted ? toggleMute : isPlaying ? toggleMute : playGreeting}
-                className={cn(
-                  "p-2 rounded-lg border transition-all flex items-center gap-2 font-mono text-xs focus:outline-none",
-                  isPlaying
-                    ? "bg-cyan-500/20 border-cyan-400 text-cyan-300 animate-pulse shadow-[0_0_12px_rgba(34,211,238,0.3)]"
-                    : isMuted
-                    ? "bg-navy/80 border-slate-700 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50"
-                    : "bg-navy/80 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
-                )}
-                title={isMuted ? "Unmute Voice Greeting" : isPlaying ? "Mute Voice Greeting" : "Play Male Welcome Greeting"}
-              >
-                {isMuted ? (
-                  <VolumeX className="w-4 h-4 text-red-400" />
-                ) : (
-                  <Volume2 className="w-4 h-4 text-cyan-400" />
-                )}
-                <span className="hidden lg:inline">{isPlaying ? "Speaking..." : isMuted ? "Muted" : "Voice Greeting"}</span>
-              </button>
-
-              <Button 
-                variant="outline" 
-                className="py-2 px-4 text-sm"
-                href="/Resume.pdf"
-                target="_blank"
-                magnetic={false}
-                download="Hemant_Patidar_Resume.pdf"
-              >
-                Resume <Download className="w-4 h-4 ml-1" />
-              </Button>
-            </div>
-          </nav>
-
-          {/* Mobile Toggle */}
-          <button 
-            className="md:hidden text-slate-300 hover:text-cyan-400 focus:outline-none z-50 relative"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+          {/* Mobile Toggle Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-xl bg-white/5 text-slate-300 border border-white/10"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </header>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="fixed inset-0 z-30 bg-navy/98 backdrop-blur-2xl flex flex-col items-center justify-center pt-20"
-        >
-          <ul className="flex flex-col items-center gap-8 text-lg">
-            {NAV_LINKS.map((link) => (
-              <li key={link.id}>
-                <button
-                  onClick={() => scrollTo(link.id)}
-                  className={cn(
-                    "font-mono transition-colors focus:outline-none",
-                    activeSection === link.id ? "text-cyan-400" : "text-slate-300 hover:text-cyan-400"
-                  )}
-                >
-                  {link.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-12">
-            <Button 
-              variant="outline" 
-              href="/Resume.pdf"
-              target="_blank"
-              magnetic={false}
-              download="Hemant_Patidar_Resume.pdf"
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden pt-4 pb-2 border-t border-white/10 mt-3 flex flex-col gap-3">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="font-mono text-xs font-semibold text-slate-300 hover:text-[#e50914] py-1.5 tracking-wider"
             >
-              Resume <Download className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
-        </motion.div>
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="/Resume 3.pdf"
+            target="_blank"
+            download="Hemant_Patidar_Resume.pdf"
+            className="inline-flex items-center justify-center gap-2 p-2.5 rounded-xl bg-cyan-600/30 text-cyan-200 font-mono text-xs font-bold"
+          >
+            <FileText className="w-4 h-4" /> DOWNLOAD RESUME
+          </a>
+        </div>
       )}
-    </>
+    </header>
   );
-}
+};
