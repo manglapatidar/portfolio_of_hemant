@@ -1,17 +1,17 @@
 import React from "react";
-import { PORTFOLIO_DATA } from "../../data/data";
+import { PORTFOLIO_DATA } from "../../data/portfolio";
 
 export const Footer: React.FC = () => {
   const { engineer } = PORTFOLIO_DATA;
 
   return (
-    <footer className="py-12 border-t border-white/10 bg-[#030408] text-slate-400 font-mono text-xs relative z-10">
-      <div className="container mx-auto px-6 max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer className="py-12 border-t border-white/10 bg-[#030406] text-slate-400 font-mono text-xs relative z-20">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
-          <span className="text-[#e50914] font-bold">HEMANTFLIX</span> — {engineer.name} ({engineer.role})
+          <span className="text-[#e50914] font-bold font-mono">HEMANTFLIX</span> — {engineer.name} ({engineer.role})
         </div>
-        <div className="text-slate-500 text-[11px]">
-          © {new Date().getFullYear()} ALL RIGHTS RESERVED • BUILT WITH REACT, TYPESCRIPT, TAILWIND & GSAP/FRAMER MOTION
+        <div className="text-slate-500 text-[11px] font-sans">
+          © {new Date().getFullYear()} ALL RIGHTS RESERVED • BUILT WITH REACT, TYPESCRIPT, TAILWIND & FRAMER MOTION
         </div>
         <div className="flex items-center gap-4">
           <a
@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
             LINKEDIN
           </a>
           <a
-            href="/Resume 3.pdf"
+            href={engineer.resumeUrl}
             target="_blank"
             download="Hemant_Patidar_Resume.pdf"
             className="hover:text-violet-400 transition-colors"

@@ -2,40 +2,66 @@ import { useState } from "react";
 import { CinematicBackground } from "./components/ui/CinematicBackground";
 import { CustomCursor } from "./components/ui/CustomCursor";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
-import { Navbar } from "./components/layout/Navbar";
+import { IntroEntrance } from "./components/Intro/IntroEntrance";
+import { StreamingNavbar } from "./components/Navigation/StreamingNavbar";
+import { HeroCinematicCharacter } from "./components/Hero/HeroCinematicCharacter";
+import { ExploreRows } from "./components/Explore/ExploreRows";
+import { TopProjectsCatalog } from "./components/Projects/TopProjectsCatalog";
+import { ProjectCinematicModal } from "./components/ProjectModal/ProjectCinematicModal";
+import { TechUniverseOrbit } from "./components/TechUniverse/TechUniverseOrbit";
+import { EngineerEditorial } from "./components/Engineer/EngineerEditorial";
+import { CredentialsTimeline } from "./components/Education/CredentialsTimeline";
+import { EndCreditsContact } from "./components/Contact/EndCreditsContact";
 import { Footer } from "./components/layout/Footer";
-import { HeroHemantflix } from "./components/sections/HeroHemantflix";
-import { CinematicSubjectReveal } from "./components/ui/CinematicSubjectReveal";
-import { NetflixRows } from "./components/sections/NetflixRows";
-import { ProjectDetailModal } from "./components/ui/ProjectDetailModal";
-import type { ProjectItem } from "./data/data";
+import type { ProjectData } from "./data/portfolio";
 
 function App() {
-  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [introFinished, setIntroFinished] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-slate-200 font-sans selection:bg-red-500/30 selection:text-red-200 relative overflow-x-hidden">
-      {/* Background Atmosphere & Custom Cursor */}
+    <div className="min-h-screen bg-[#050505] text-slate-200 font-sans selection:bg-red-600/40 selection:text-white relative overflow-x-hidden">
+      {/* Background Atmosphere & Subtle Cursor */}
       <CinematicBackground />
       <CustomCursor />
       <ScrollProgress />
 
-      {/* Global Navbar */}
-      <Navbar />
+      {/* Screen 1: Cinematic Intro Screen */}
+      {!introFinished && (
+        <IntroEntrance onComplete={() => setIntroFinished(true)} />
+      )}
 
-      {/* Main Portfolio Sections */}
+      {/* Main Streaming Platform Layout */}
+      <StreamingNavbar />
+
       <main className="relative z-10">
-        <HeroHemantflix />
-        <CinematicSubjectReveal />
-        <NetflixRows onOpenProjectModal={(project) => setSelectedProject(project)} />
+        {/* Screen 2: Hero Character Spotlight */}
+        <HeroCinematicCharacter />
+
+        {/* Screen 3: Continue Exploring Tiles */}
+        <ExploreRows />
+
+        {/* Screen 4: Top Projects Catalog */}
+        <TopProjectsCatalog onOpenProjectModal={(project) => setSelectedProject(project)} />
+
+        {/* Screen 5: AI / ML Universe Orbit */}
+        <TechUniverseOrbit />
+
+        {/* Screen 6: The Engineer Editorial */}
+        <EngineerEditorial />
+
+        {/* Screen 7: Education & Certifications */}
+        <CredentialsTimeline />
+
+        {/* Screen 8: Contact / End Credits */}
+        <EndCreditsContact />
       </main>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Project Cinematic Detail Modal */}
+      {/* Cinematic Project Detail Modal */}
       {selectedProject && (
-        <ProjectDetailModal
+        <ProjectCinematicModal
           project={selectedProject}
           onClose={() => setSelectedProject(null)}
         />
