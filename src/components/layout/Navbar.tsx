@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, FileText, UserCheck } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 
-interface NavbarProps {
-  selectedProfile: string;
-  onChangeProfile: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ selectedProfile, onChangeProfile }) => {
+export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -58,22 +53,12 @@ export const Navbar: React.FC<NavbarProps> = ({ selectedProfile, onChangeProfile
 
         {/* Action Controls */}
         <div className="flex items-center gap-3">
-          {/* Profile Badge Button */}
-          <button
-            onClick={onChangeProfile}
-            title="Switch Profile Mode"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl font-mono text-[11px] font-bold bg-[#e50914]/20 border border-red-500/50 text-red-400 hover:bg-red-600 hover:text-white transition-all shadow-[0_0_15px_rgba(229,9,20,0.3)]"
-          >
-            <UserCheck className="w-3.5 h-3.5" />
-            <span className="uppercase">{selectedProfile}</span>
-          </button>
-
           {/* Resume CTA */}
           <a
             href="/Resume 3.pdf"
             target="_blank"
             download="Hemant_Patidar_Resume.pdf"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-600/20 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-600/30 font-mono text-[11px] font-bold transition-all"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-600/20 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-600/30 font-mono text-[11px] font-bold transition-all"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>RESUME</span>

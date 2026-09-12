@@ -4,22 +4,11 @@ import { Play, Download, Terminal, Cpu } from "lucide-react";
 import { PORTFOLIO_DATA } from "../../data/data";
 
 interface HeroHemantflixProps {
-  selectedProfile: string;
+  selectedProfile?: string;
 }
 
-export const HeroHemantflix: React.FC<HeroHemantflixProps> = ({ selectedProfile }) => {
+export const HeroHemantflix: React.FC<HeroHemantflixProps> = () => {
   const { engineer } = PORTFOLIO_DATA;
-
-  const getProfilePerspective = () => {
-    switch (selectedProfile) {
-      case "recruiter":
-        return "RECRUITER MODE — HIGHLIGHTING ML MODELS, FASTAPI APIS & CGPA CREDENTIALS";
-      case "developer":
-        return "DEVELOPER MODE — HIGHLIGHTING PYTORCH, T5 TRANSFORMERS & ARCHITECTURE";
-      default:
-        return "EXPLORER MODE — HIGHLIGHTING AI MODEL INTERACTIVE SIMULATIONS";
-    }
-  };
 
   return (
     <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center items-center pt-28 pb-12 px-6 overflow-hidden">
@@ -29,7 +18,7 @@ export const HeroHemantflix: React.FC<HeroHemantflixProps> = ({ selectedProfile 
 
       <div className="container mx-auto max-w-6xl relative z-10 text-center flex flex-col items-center">
         
-        {/* Active Perspective Badge */}
+        {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -38,7 +27,7 @@ export const HeroHemantflix: React.FC<HeroHemantflixProps> = ({ selectedProfile 
         >
           <Terminal className="w-4 h-4 text-[#e50914] animate-pulse" />
           <span className="font-mono text-xs text-slate-200 tracking-wider font-semibold">
-            {getProfilePerspective()}
+            HEMANTFLIX // AI & ML ENGINEER PORTFOLIO
           </span>
         </motion.div>
 
