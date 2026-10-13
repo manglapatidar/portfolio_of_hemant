@@ -4,7 +4,7 @@ import { CustomCursor } from "./components/ui/CustomCursor";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { IntroEntrance } from "./components/Intro/IntroEntrance";
 import { StreamingNavbar } from "./components/Navigation/StreamingNavbar";
-import { HeroCinematicCharacter } from "./components/Hero/HeroCinematicCharacter";
+import { InteractivePortfolioHero } from "./components/Hero/InteractivePortfolioHero";
 import { ExploreRows } from "./components/Explore/ExploreRows";
 import { TopProjectsCatalog } from "./components/Projects/TopProjectsCatalog";
 import { ProjectCinematicModal } from "./components/ProjectModal/ProjectCinematicModal";
@@ -20,7 +20,14 @@ function App() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-slate-200 font-sans selection:bg-red-600/40 selection:text-white relative overflow-x-hidden">
+    <div
+      className="min-h-screen text-slate-800 font-sans selection:bg-rose-500/20 selection:text-rose-950 relative overflow-x-hidden"
+      style={{
+        background:
+          "radial-gradient(ellipse 75% 65% at 50% 32%, #ffffff 0%, #ffffff 32%, #fff5f8 52%, #fce7ec 72%, #881337 130%)",
+        backgroundAttachment: "fixed",
+      }}
+    >
       {/* Background Atmosphere & Subtle Cursor */}
       <CinematicBackground />
       <CustomCursor />
@@ -35,8 +42,8 @@ function App() {
       <StreamingNavbar />
 
       <main className="relative z-10">
-        {/* Screen 2: Hero Character Spotlight */}
-        <HeroCinematicCharacter />
+        {/* Screen 2: Interactive Character Hero (Sri Tech Style) */}
+        <InteractivePortfolioHero />
 
         {/* Screen 3: Continue Exploring Tiles */}
         <ExploreRows />

@@ -12,7 +12,7 @@ export const ScrollProgress: React.FC = () => {
   return (
     <div className="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-50 pointer-events-none">
       <motion.div
-        className="h-full bg-gradient-to-r from-cyan-500 via-violet-500 to-cyan-300 origin-left shadow-[0_0_12px_rgba(34,211,238,0.8)]"
+        className="h-full bg-gradient-to-r from-rose-900 via-rose-600 to-rose-300 origin-left shadow-[0_0_12px_rgba(225,29,72,0.6)]"
         style={{ scaleX }}
       />
     </div>

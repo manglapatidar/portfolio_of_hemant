@@ -46,19 +46,19 @@ export const CustomCursor: React.FC = () => {
     <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
       {/* Outer subtle glow ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-400/40 bg-cyan-500/10 pointer-events-none"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-rose-500/40 bg-rose-500/10 pointer-events-none"
         animate={{
           x: mousePos.x - 16,
           y: mousePos.y - 16,
           scale: isHovered ? 2 : 1,
-          borderColor: isHovered ? "rgba(139, 92, 246, 0.7)" : "rgba(34, 211, 238, 0.4)",
-          backgroundColor: isHovered ? "rgba(139, 92, 246, 0.15)" : "rgba(34, 211, 238, 0.08)",
+          borderColor: isHovered ? "rgba(136, 19, 55, 0.8)" : "rgba(244, 63, 94, 0.4)",
+          backgroundColor: isHovered ? "rgba(136, 19, 55, 0.15)" : "rgba(244, 63, 94, 0.08)",
         }}
         transition={{ type: "spring", stiffness: 350, damping: 25, mass: 0.2 }}
       />
       {/* Center sharp dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-cyan-300 pointer-events-none shadow-[0_0_8px_rgba(34,211,238,0.9)]"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-rose-600 pointer-events-none shadow-[0_0_8px_rgba(225,29,72,0.8)]"
         animate={{
           x: mousePos.x - 4,
           y: mousePos.y - 4,

@@ -1,55 +1,62 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #050811;
-  --color-navy-light: #0a0f1d;
-  --color-cyan-accent: #22d3ee;
-  --color-cyan-dark: #0891b2;
-  --color-violet-accent: #8b5cf6;
+  --color-maroon-950: #4c0519;
+  --color-maroon-900: #881337;
+  --color-maroon-800: #9f1239;
+  --color-rose-600: #e11d48;
+  --color-rose-500: #f43f5e;
+  --color-rose-300: #fda4af;
+  --color-rose-100: #ffe4e6;
+  --color-rose-50: #fff1f2;
+  --color-pearl: #fdfafb;
   
-  --font-sans: "Space Grotesk", sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Outfit", "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
 @layer base {
   body {
-    @apply bg-[#050505] text-slate-300 font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-200;
+    @apply bg-[#fdf8fa] text-slate-800 font-sans antialiased selection:bg-rose-500/20 selection:text-rose-950;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-white tracking-tight;
+    @apply font-bold text-slate-900 tracking-tight;
   }
 
   section {
     @apply scroll-mt-24;
   }
 
-  /* Custom Glowing Scrollbar */
+  /* Custom Rose/Maroon Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #030305;
+    background: #fdf2f4;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
+    background: #f43f5e80;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #0891b2;
+    background: #881337;
   }
 }
 
 @layer utilities {
-  .bg-radial-vignette {
-    background: radial-gradient(circle at center, transparent 30%, rgba(5, 6, 13, 0.85) 85%);
+  .bg-hero-glow {
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #fff7f8 35%, #fce7ec 65%, #f3cbd5 85%, #881337 130%);
   }
 
-  .text-glow-cyan {
-    text-shadow: 0 0 25px rgba(34, 211, 238, 0.6);
+  .text-glow-rose {
+    text-shadow: 0 0 25px rgba(225, 29, 72, 0.4);
   }
 
-  .text-glow-violet {
-    text-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+  .glass-card {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(225, 29, 72, 0.12);
   }
 }

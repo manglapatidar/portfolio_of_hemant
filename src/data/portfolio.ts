@@ -85,7 +85,7 @@ export const PORTFOLIO_DATA = {
       approach: "Fine-tuned a T5 sequence-to-sequence model using Byte-Pair Encoding tokenization and self-attention, serving predictions via FastAPI.",
       pipelineSteps: ["Raw Document Input", "Subword Tokenization", "T5 Transformer Processing", "Beam Search Decoding", "Abstractive Summary Output"],
       githubUrl: "https://github.com/hemant815/hemant815",
-      visualTheme: "from-red-900/40 via-[#0a0d1a] to-black"
+      visualTheme: "from-rose-100/70 via-white to-rose-50/80"
     },
     {
       id: "02",
@@ -97,7 +97,7 @@ export const PORTFOLIO_DATA = {
       approach: "Combined OpenCV facial landmark vector extraction with voice frequency spectrum matching for dual-factor biometric attendance verification.",
       pipelineSteps: ["Camera Stream Capture", "Facial Landmark Mesh", "Voice Waveform Match", "Euclidean Distance Verification", "SQL Database Record"],
       githubUrl: "https://github.com/hemant815/hemant815",
-      visualTheme: "from-cyan-950/40 via-[#0a0d1a] to-black"
+      visualTheme: "from-rose-50 via-white to-pink-50/70"
     },
     {
       id: "03",
@@ -109,7 +109,7 @@ export const PORTFOLIO_DATA = {
       approach: "Implemented Adaptive Instance Normalization (AdaIN) with a VGG19 encoder-decoder network to instantly synthesize arbitrary artistic styles.",
       pipelineSteps: ["Content & Style Images", "VGG19 Feature Extraction", "AdaIN Layer Normalization", "Decoder Image Synthesis", "Artistic Image Output"],
       githubUrl: "https://github.com/hemant815/hemant815",
-      visualTheme: "from-violet-950/40 via-[#0a0d1a] to-black"
+      visualTheme: "from-pink-100/60 via-white to-rose-50/70"
     },
     {
       id: "04",
@@ -121,7 +121,7 @@ export const PORTFOLIO_DATA = {
       approach: "Cleaned raw transaction logs, engineered RFM features, reduced feature dimensions with PCA, and trained K-Means clustering validated by Silhouette Analysis.",
       pipelineSteps: ["Raw Transactions Log", "RFM Feature Scaling", "PCA Dimensionality Reduction", "K-Means Centroid Allocation", "Customer Persona Segments"],
       githubUrl: "https://github.com/hemant815/hemant815",
-      visualTheme: "from-emerald-950/40 via-[#0a0d1a] to-black"
+      visualTheme: "from-rose-100/50 via-white to-rose-50"
     }
   ] as ProjectData[],
 
